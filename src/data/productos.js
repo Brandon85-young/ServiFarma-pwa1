@@ -17,6 +17,8 @@ export const PRODUCTOS = [
     precio: 45,
     cantidad: 40,
     descripcion: 'Caja con 20 tabletas. Ayuda a bajar la fiebre y quitar el dolor leve o moderado.',
+    modoUso: 'Adultos: 1 tableta cada 8 horas. No pasar de 4 tabletas al día.',
+    precauciones: 'No tomar con alcohol. Consulta a tu médico si tienes problemas del hígado.',
     imagen: '/img/productos/paracetamol.svg',
   },
   {
@@ -26,6 +28,8 @@ export const PRODUCTOS = [
     precio: 62,
     cantidad: 8,
     descripcion: 'Caja con 10 tabletas. Desinflamatorio para dolores musculares y de cabeza.',
+    modoUso: 'Adultos: 1 tableta cada 8 horas, después de comer.',
+    precauciones: 'No usar si tienes gastritis o úlcera. No dar a menores de 12 años.',
     imagen: '/img/productos/ibuprofeno.svg',
   },
   {
@@ -35,6 +39,8 @@ export const PRODUCTOS = [
     precio: 120,
     cantidad: 15,
     descripcion: 'Caja con 12 cápsulas. Antibiótico. Se vende solo con receta médica.',
+    modoUso: 'Según lo que indique el médico, normalmente 1 cápsula cada 8 horas.',
+    precauciones: 'Solo con receta médica. Termina el tratamiento aunque te sientas mejor.',
     imagen: '/img/productos/amoxicilina.svg',
   },
   {
@@ -44,6 +50,8 @@ export const PRODUCTOS = [
     precio: 58,
     cantidad: 25,
     descripcion: 'Caja con 10 tabletas. Ayuda contra la alergia, estornudos y comezón.',
+    modoUso: 'Adultos: 1 tableta al día.',
+    precauciones: 'Puede causar un poco de sueño. No manejar si te sientes somnoliento.',
     imagen: '/img/productos/loratadina.svg',
   },
   {
@@ -53,6 +61,8 @@ export const PRODUCTOS = [
     precio: 89,
     cantidad: 0,
     descripcion: 'Caja con 12 tabletas. Alivia los síntomas de la gripa y el resfriado.',
+    modoUso: '1 tableta de día y 1 de noche, por no más de 5 días.',
+    precauciones: 'Causa sueño la de noche. No combinar con otros antigripales.',
     imagen: '/img/productos/antigripal.svg',
   },
   {
@@ -62,6 +72,8 @@ export const PRODUCTOS = [
     precio: 75,
     cantidad: 30,
     descripcion: 'Tubo con 10 tabletas efervescentes. Ayuda a las defensas del cuerpo.',
+    modoUso: 'Disolver 1 tableta en un vaso de agua, una vez al día.',
+    precauciones: 'No tomar más de 1 al día. Mantener el tubo bien cerrado.',
     imagen: '/img/productos/vitamina-c.svg',
   },
   {
@@ -71,6 +83,8 @@ export const PRODUCTOS = [
     precio: 95,
     cantidad: 12,
     descripcion: 'Frasco con 30 tabletas. Vitaminas B1, B6 y B12.',
+    modoUso: '1 tableta al día con alimentos.',
+    precauciones: 'Puede cambiar el color de la orina, es normal.',
     imagen: '/img/productos/complejo-b.svg',
   },
   {
@@ -80,6 +94,8 @@ export const PRODUCTOS = [
     precio: 38,
     cantidad: 50,
     descripcion: 'Gel con 70% de alcohol para limpiar las manos sin agua.',
+    modoUso: 'Aplicar una pequeña cantidad y frotar las manos hasta que sequen.',
+    precauciones: 'Solo uso externo. Mantener lejos del fuego y de los niños.',
     imagen: '/img/productos/gel.svg',
   },
 ];
