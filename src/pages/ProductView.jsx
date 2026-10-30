@@ -1,24 +1,24 @@
 import './ProductView.css';
-/*esta es una vista independiente*/
+//esta es una vista independiente
 function ProductView(){
     return(
-        <main className ="product-container"> /*product-container; contiene toda nuestra vista*/
+        <main className ="product-container">
             {/* titulo del producto */}
 
-            <header className="prodcut-header">/*product-header; contiene el titulo*/
+            <header className="prodcut-header">
                 <h1>Paracetamol 500 mg</h1>
             </header>
 
             {/* Contenido principal */}
-            <section className="product-content">/*product-content; agrupa imagen y descripcion*/
+            <section className="product-content">
                 {/* Imagen */}
-                <div className="product-image">/*product-image; contiene la imagen*/
+                <div className="product-image">
                     <img
                     src="/producto.png"
                     alt="imagen del producto"
                     />
                 </div>
-                <div className="product-description">/*product-description; contiene los datos */
+                <div className="product-description">
 
                     <h2>Descripcion</h2>
 
