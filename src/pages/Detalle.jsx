@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { PRODUCTOS } from '../data/productos.js';
 
 // ===== PANTALLA DE DETALLE DEL PRODUCTO =====
 // Los botones cambian la información que se ve del producto.
-export default function Detalle({ producto, volver }) {
+export default function Detalle({ producto, verProducto, volver }) {
   const [pestana, setPestana] = useState('descripcion');
 
   if (!producto) return null;
@@ -11,6 +12,16 @@ export default function Detalle({ producto, volver }) {
   let estado = { texto: 'Disponible', clase: 'disponible' };
   if (producto.cantidad === 0) estado = { texto: 'Agotado', clase: 'agotado' };
   else if (producto.cantidad < 10) estado = { texto: 'Quedan pocas piezas', clase: 'pocas' };
+
+  // Producto anterior y siguiente (para navegar con botones)
+  const posicion = PRODUCTOS.findIndex((p) => p.id === producto.id);
+  const anterior = PRODUCTOS[(posicion - 1 + PRODUCTOS.length) % PRODUCTOS.length];
+  const siguiente = PRODUCTOS[(posicion + 1) % PRODUCTOS.length];
+
+  function cambiarProducto(p) {
+    setPestana('descripcion');
+    verProducto(p);
+  }
 
   return (
     <section className="detalle">
@@ -67,6 +78,12 @@ export default function Detalle({ producto, volver }) {
                 <li>Categoría: {producto.categoria}</li>
               </ul>
             )}
+          </div>
+
+          {/* ===== BOTONES PARA IR A OTRO PRODUCTO ===== */}
+          <div className="navegacion-productos">
+            <button onClick={() => cambiarProducto(anterior)}>‹ {anterior.nombre}</button>
+            <button onClick={() => cambiarProducto(siguiente)}>{siguiente.nombre} ›</button>
           </div>
         </div>
       </div>
