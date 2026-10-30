@@ -5,6 +5,7 @@ import { useState } from 'react';
 export default function Login({ onLogin }) {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
+  const [verContrasena, setVerContrasena] = useState(false);
   const [error, setError] = useState('');
 
   function entrar(e) {
@@ -38,17 +39,27 @@ export default function Login({ onLogin }) {
         />
 
         <label htmlFor="contrasena">Contraseña</label>
-        <input
-          id="contrasena"
-          type="password"
-          value={contrasena}
-          onChange={(e) => setContrasena(e.target.value)}
-          placeholder="Escribe tu contraseña"
-        />
+        <div className="campo-contrasena">
+          <input
+            id="contrasena"
+            type={verContrasena ? 'text' : 'password'}
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
+            placeholder="Escribe tu contraseña"
+          />
+          <button
+            type="button"
+            className="btn-ver"
+            onClick={() => setVerContrasena(!verContrasena)}
+          >
+            {verContrasena ? 'Ocultar' : 'Ver'}
+          </button>
+        </div>
 
         {error && <p className="mensaje-error">{error}</p>}
 
         <button type="submit" className="btn-principal">Entrar</button>
+        <p className="nota">Usuario de prueba: admin / 1234</p>
       </form>
     </section>
   );
