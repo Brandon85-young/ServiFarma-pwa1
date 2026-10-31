@@ -123,3 +123,44 @@ h2 { margin: 20px 0 12px; color: var(--morado-oscuro); }
 .login-caja .btn-principal { margin-top: 10px; }
 .mensaje-error { color: var(--rojo); font-size: 0.9rem; }
 
+/* ===== CARRUSEL ===== */
+.carrusel {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--morado-claro);
+}
+.carrusel img { width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; display: block; }
+.flecha {
+  position: absolute;
+  z-index: 1;
+  bottom: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--morado);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.flecha:hover { background: var(--blanco); }
+.flecha.izquierda { left: 10px; }
+.flecha.derecha { right: 10px; }
+.puntos {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+}
+.punto.activo { background: var(--rojo); }
+
