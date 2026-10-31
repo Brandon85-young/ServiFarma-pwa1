@@ -1,0 +1,42 @@
+/* ===== ESTILOS GENERALES - Michelle ===== */
+
+/* ===== COLORES: blanco 70%, morado 25%, rojo 5% ===== */
+:root {
+  --blanco: #ffffff;
+  --fondo: #faf8fd;
+  --morado: #6b21a8;
+  --morado-oscuro: #4c1577;
+  --morado-claro: #f1e8fa;
+  --rojo: #dc2626;
+  --texto: #1f1a24;
+  --gris: #6b6475;
+  --borde: #e5dff0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+button { font: inherit; cursor: pointer; }
+
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 16px; }
+h2 { margin: 20px 0 12px; color: var(--morado-oscuro); }
+
+/* ===== BOTONES ===== */
+.btn-principal {
+  background: var(--morado);
+  color: var(--blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background 0.2s;
+}
+.btn-principal:hover { background: var(--morado-oscuro); }
+.centrado { text-align: center; margin: 24px 0; }
+.nota { color: var(--gris); font-size: 0.85rem; margin-top: 8px; }
+
