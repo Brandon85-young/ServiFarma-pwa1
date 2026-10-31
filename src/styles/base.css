@@ -1,0 +1,177 @@
+/* ===== ESTILOS GENERALES - Michelle ===== */
+
+/* ===== COLORES: blanco 70%, morado 25%, rojo 5% ===== */
+:root {
+  --blanco: #ffffff;
+  --fondo: #faf8fd;
+  --morado: #6b21a8;
+  --morado-oscuro: #4c1577;
+  --morado-claro: #f1e8fa;
+  --rojo: #dc2626;
+  --texto: #1f1a24;
+  --gris: #6b6475;
+  --borde: #e5dff0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+button { font: inherit; cursor: pointer; }
+
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 16px; }
+h2 { margin: 20px 0 12px; color: var(--morado-oscuro); }
+
+/* ===== BOTONES ===== */
+.btn-principal {
+  background: var(--morado);
+  color: var(--blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background 0.2s;
+}
+.btn-principal:hover { background: var(--morado-oscuro); }
+.centrado { text-align: center; margin: 24px 0; }
+.nota { color: var(--gris); font-size: 0.85rem; margin-top: 8px; }
+
+/* ===== ENCABEZADO ===== */
+.encabezado {
+  background: var(--morado);
+  color: var(--blanco);
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.logo {
+  background: none;
+  border: none;
+  color: var(--blanco);
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.btn-menu { background: none; border: none; color: var(--blanco); font-size: 1.6rem; }
+
+.menu { display: none; width: 100%; flex-direction: column; gap: 10px; padding-top: 12px; }
+.menu.abierto { display: flex; }
+.menu > button:not(.btn-login) {
+  background: none;
+  border: none;
+  color: var(--blanco);
+  text-align: left;
+  padding: 6px 0;
+}
+.menu > button.activo { font-weight: bold; text-decoration: underline; }
+
+.buscador {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+.btn-login {
+  background: var(--blanco);
+  color: var(--morado);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-weight: bold;
+}
+.usuario { display: flex; align-items: center; gap: 10px; }
+
+/* ===== LOGIN ===== */
+.login { display: flex; justify-content: center; padding: 30px 0; }
+.login-caja {
+  background: var(--blanco);
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.login-caja h2 { margin-top: 0; text-align: center; }
+.login-caja input {
+  padding: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+.login-caja input:focus { outline: 2px solid var(--morado); }
+.campo-contrasena { display: flex; gap: 6px; }
+.btn-ver {
+  background: var(--morado-claro);
+  color: var(--morado);
+  border: none;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+.login-caja .btn-principal { margin-top: 10px; }
+.mensaje-error { color: var(--rojo); font-size: 0.9rem; }
+
+/* ===== CARRUSEL ===== */
+.carrusel {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--morado-claro);
+}
+.carrusel img { width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; display: block; }
+.flecha {
+  position: absolute;
+  z-index: 1;
+  bottom: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--morado);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.flecha:hover { background: var(--blanco); }
+.flecha.izquierda { left: 10px; }
+.flecha.derecha { right: 10px; }
+.puntos {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+}
+.punto.activo { background: var(--rojo); }
+
+/* ===== PIE DE PÁGINA ===== */
+.pie {
+  background: var(--morado-oscuro);
+  color: var(--blanco);
+  padding: 24px 16px 12px;
+  margin-top: 30px;
+}
+.contacto { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4px; }
+.contacto h3 { margin-bottom: 6px; }
+.derechos { text-align: center; font-size: 0.8rem; opacity: 0.8; margin-top: 16px; }
+
