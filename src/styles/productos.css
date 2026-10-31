@@ -1,0 +1,159 @@
+/* ===== ESTILOS DE PRODUCTOS - Juan ===== */
+ 
+/* ===== TARJETAS DE PRODUCTO ===== */
+.tarjetas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.tarjeta {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tarjeta:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(107, 33, 168, 0.15); }
+.tarjeta img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--morado-claro);
+  border-radius: 8px;
+}
+.tarjeta h3 { font-size: 0.95rem; margin: 8px 0 4px; }
+.categoria { color: var(--gris); font-size: 0.8rem; }
+.precio { color: var(--morado); font-weight: bold; }
+.precio.grande { font-size: 1.8rem; margin-bottom: 12px; }
+ 
+/* ===== CATÁLOGO ===== */
+.catalogo { display: flex; flex-direction: column; gap: 16px; }
+.filtro {
+  display: none;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 16px;
+  flex-direction: column;
+  gap: 8px;
+}
+.filtro.abierto { display: flex; }
+.filtro h3 { color: var(--morado-oscuro); }
+.opcion { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.opcion input { accent-color: var(--morado); }
+.btn-limpiar {
+  background: none;
+  border: none;
+  color: var(--rojo);
+  text-align: left;
+  font-size: 0.9rem;
+}
+.catalogo-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.catalogo-encabezado h2 { margin: 0; }
+.controles { display: flex; gap: 8px; }
+.btn-filtro {
+  background: var(--morado-claro);
+  color: var(--morado);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+.controles select {
+  padding: 6px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font: inherit;
+}
+.catalogo-contenido .tarjetas { margin-top: 12px; }
+.vacio { text-align: center; color: var(--gris); padding: 30px; }
+ 
+/* ===== DETALLE ===== */
+.btn-volver {
+  background: none;
+  border: none;
+  color: var(--morado);
+  font-weight: bold;
+}
+.detalle-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 20px;
+}
+.detalle-imagen img {
+  width: 100%;
+  max-width: 360px;
+  display: block;
+  margin: 0 auto;
+  background: var(--morado-claro);
+  border-radius: 10px;
+}
+.detalle-info h3 { margin: 12px 0 4px; font-size: 1rem; color: var(--morado-oscuro); }
+.estado {
+  display: inline-block;
+  margin: 14px 0 8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.estado.disponible { background: var(--morado-claro); color: var(--morado); }
+.estado.pocas { background: #fdecec; color: var(--rojo); }
+.estado.agotado { background: var(--rojo); color: var(--blanco); }
+ 
+ 
+/* Sello rojo de agotado sobre la imagen */
+.tarjeta-imagen { position: relative; }
+.sello-agotado {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--rojo);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+ 
+/* Botón "Ver más" de las tarjetas */
+.btn-vermas {
+  margin-top: 8px;
+  width: 100%;
+  background: var(--morado-claro);
+  color: var(--morado);
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  font-weight: bold;
+}
+.btn-vermas:hover { background: var(--morado); color: var(--blanco); }
+ 
+/* Pestañas del detalle */
+.pestanas { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 10px; }
+.pestana {
+  background: var(--morado-claro);
+  color: var(--morado);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+}
+.pestana.activa { background: var(--morado); color: var(--blanco); }
+.panel { min-height: 70px; line-height: 1.5; }
+.panel ul { padding-left: 20px; }
+.navegacion-productos { display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; }
+.navegacion-productos button {
+  background: none;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--morado);
+}
+.navegacion-productos button:hover { border-color: var(--morado); }
