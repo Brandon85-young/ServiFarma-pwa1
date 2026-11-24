@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER - ServiFarmaSerVel =====
 // Cambia la versión cada vez que modifiques los archivos guardados
-const CACHE_NAME = 'servifarma-v2';
+const CACHE_NAME = 'servifarma-v3';
  
 // Archivos que se guardan para que la app abra sin internet
 const ARCHIVOS = [
@@ -39,6 +39,11 @@ self.addEventListener('activate', (event) => {
 // Estrategia "red primero, si falla usa caché".
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
+  // Las peticiones a Firebase (otro dominio) NO pasan por aquí:
+  // Firestore ya trae su propia caché sin internet, y si el SW las
+  // guardara, rompería la conexión en tiempo real.
+  if (new URL(event.request.url).origin !== self.location.origin) return;
  
   event.respondWith(
     fetch(event.request)
