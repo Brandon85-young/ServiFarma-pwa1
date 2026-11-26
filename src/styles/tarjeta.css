@@ -1,0 +1,49 @@
+/* ===== TARJETA DE PRODUCTO - Brandon ===== */
+.tp {
+  display: grid;
+  text-align: left;
+  width: 100%;
+  color: var(--tinta);
+}
+.tp-imagen { background: var(--papel-2); overflow: hidden; }
+.tp-imagen img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 250ms ease-out; }
+.tp-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tp-nombre {
+  font-family: var(--f-titulo);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--rapido);
+}
+.tp-presentacion { font-size: 0.88rem; color: var(--tinta-suave); }
+.tp-alerta { font-family: var(--f-dato); font-size: 0.78rem; color: var(--rojo); margin-top: 2px; }
+.tp-precio { font-size: 0.98rem; font-weight: 500; white-space: nowrap; }
+.tp-flecha { color: var(--morado); opacity: 0; transition: opacity var(--rapido), transform var(--rapido); }
+
+.tp:hover .tp-nombre { text-decoration-color: var(--morado); }
+.tp:hover .tp-flecha { opacity: 1; transform: translateX(2px); }
+.tp:hover .tp-imagen img { transform: scale(1.03); }
+
+/* Forma tarjeta: imagen arriba, nombre y precio en la misma línea */
+.tp-tarjeta {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'img img' 'info precio';
+  gap: 12px 12px;
+}
+.tp-tarjeta .tp-imagen { grid-area: img; }
+.tp-tarjeta .tp-info { grid-area: info; }
+.tp-tarjeta .tp-precio { grid-area: precio; padding-top: 2px; }
+.tp-tarjeta .tp-flecha { display: none; }
+
+/* Forma renglón: imagen chica a la izquierda, línea abajo */
+.tp-renglon {
+  grid-template-columns: 72px minmax(0, 1fr) auto 16px;
+  align-items: center;
+  gap: var(--e2);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linea);
+}
+.tp-renglon .tp-imagen img { aspect-ratio: 1; }

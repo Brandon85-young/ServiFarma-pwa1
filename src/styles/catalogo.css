@@ -1,0 +1,80 @@
+/* ===== CATÁLOGO - Brandon ===== */
+.catalogo { display: grid; gap: var(--e3); padding-top: var(--e3); }
+
+/* ----- Categorías: en celular, fila que se desliza ----- */
+.cat-lista {
+  display: flex;
+  gap: var(--e3);
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--linea);
+  position: sticky;
+  top: 156px;  /* altura del encabezado en celular */
+  background: var(--papel);
+  z-index: 5;
+  margin: 0 -20px;
+  padding: 0 20px;
+}
+.cat-lista::-webkit-scrollbar { display: none; }
+.cat-titulo { display: none; }
+.cat-lista button {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  white-space: nowrap;
+  padding: 12px 0;
+  color: var(--tinta-suave);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--rapido);
+}
+.cat-lista button:hover { color: var(--tinta); }
+.cat-lista button.activa { color: var(--tinta); border-bottom-color: var(--morado); }
+.cat-num { font-size: 0.75rem; color: var(--tinta-suave); }
+
+/* ----- Cabecera ----- */
+.cat-cabeza { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--e2); }
+.cat-cabeza h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-top: 8px; color: var(--morado-oscuro); }
+.cat-controles { display: flex; gap: var(--e1); align-items: center; }
+.cat-controles select { width: auto; padding: 8px 12px; font-size: 0.9rem; }
+.cat-forma { display: flex; border: 1px solid var(--linea); border-radius: var(--radio); }
+.cat-forma button { padding: 8px 12px; font-size: 0.9rem; color: var(--tinta-suave); }
+.cat-forma button.activa { background: var(--tinta); color: var(--papel); }
+
+.cat-resumen { margin: var(--e3) 0 var(--e2); font-size: 0.9rem; padding-bottom: var(--e2); border-bottom: 1px solid var(--tinta); }
+.cat-resumen .enlace { font-size: 0.9rem; }
+
+/* ----- Productos ----- */
+.cat-cuadricula { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e4) var(--e2); padding-top: var(--e1); }
+.cat-renglones .tp-renglon:first-child { padding-top: 4px; }
+
+.cat-vacio { padding: var(--e6) 0; }
+.cat-vacio p:first-child { font-family: var(--f-titulo); font-size: 1.4rem; margin-bottom: 6px; }
+
+@media (min-width: 600px) {
+  .cat-cuadricula { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e6) var(--e3); }
+}
+
+/* ----- Computadora: categorías como lista lateral fija ----- */
+@media (min-width: 900px) {
+  .catalogo { grid-template-columns: 220px 1fr; gap: 64px; padding-top: var(--e6); }
+  .cat-lista {
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+    top: 130px;
+    align-self: start;
+  }
+  .cat-titulo { display: block; margin-bottom: 12px; }
+  .cat-lista button {
+    justify-content: space-between;
+    padding: 9px 0 9px 14px;
+    border-bottom: none;
+    border-left: 2px solid var(--linea);
+    margin: 0;
+  }
+  .cat-lista button.activa { border-left-color: var(--morado); font-weight: 700; }
+}
