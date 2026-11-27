@@ -1,0 +1,20 @@
+/* ===== LOGIN - Máximo ===== */
+.login { display: grid; gap: var(--e6); padding-top: var(--e6); }
+.login-texto h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin: 12px 0 var(--e2); max-width: 15ch; color: var(--morado-oscuro); }
+.login-volver { margin-top: var(--e3); }
+
+/* Formulario sin caja: solo una raya arriba */
+.login-form { display: flex; flex-direction: column; gap: var(--e3); border-top: 3px solid var(--morado); padding-top: var(--e4); max-width: 420px; width: 100%; }
+.login-campo { display: flex; flex-direction: column; gap: 6px; }
+.login-campo label { font-weight: 700; font-size: 0.95rem; }
+.login-etiqueta { display: flex; justify-content: space-between; align-items: baseline; }
+.login-ver { font-size: 0.85rem; color: var(--morado); }
+.login-ver:hover { text-decoration: underline; }
+.login-error { color: var(--rojo); font-size: 0.92rem; padding-left: 12px; border-left: 3px solid var(--rojo); }
+.login-entrar { justify-content: center; padding: 14px; }
+.login-entrar:disabled { opacity: 0.6; cursor: wait; }
+.login-prueba { font-size: 0.8rem; color: var(--tinta-suave); }
+
+@media (min-width: 900px) {
+  .login { grid-template-columns: 7fr 5fr; gap: 80px; padding-top: 96px; align-items: start; }
+}
