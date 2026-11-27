@@ -1,0 +1,59 @@
+/* ===== DETALLE DEL PRODUCTO - Miguel ===== */
+.detalle { padding-top: var(--e3); }
+
+.migas { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.88rem; color: var(--tinta-suave); }
+.migas button { color: var(--morado); }
+.migas button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.migas [aria-current] { color: var(--tinta); }
+
+/* Celular: texto primero (nombre y precio arriba), imagen después */
+.detalle-cuerpo { display: grid; gap: var(--e4); margin-top: var(--e3); }
+.detalle-imagen { order: 2; background: var(--papel-2); }
+.detalle-imagen img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.detalle-info { order: 1; }
+
+.detalle-info h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin: 10px 0 6px; color: var(--morado-oscuro); }
+.detalle-presentacion { color: var(--tinta-suave); font-size: 1.05rem; }
+
+.detalle-etiqueta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--e1) var(--e3);
+  margin-top: var(--e3);
+  padding: var(--e2) 0;
+  border-top: 1px solid var(--tinta);
+  border-bottom: 1px solid var(--linea);
+}
+.detalle-precio { font-size: 2rem; font-weight: 500; }
+
+.detalle-receta {
+  margin-top: var(--e2);
+  font-family: var(--f-dato);
+  font-size: 0.85rem;
+  color: var(--rojo);
+}
+
+.detalle-seccion { margin-top: var(--e4); max-width: 60ch; }
+.detalle-seccion h2 { font-size: 1.15rem; margin-bottom: 6px; }
+.detalle-seccion.importante { padding-left: var(--e2); border-left: 3px solid var(--rojo); }
+
+.detalle-nota { margin-top: var(--e4); font-size: 0.92rem; }
+
+.detalle-vacio { padding: var(--seccion) 20px; }
+.detalle-vacio p { font-family: var(--f-titulo); font-size: 1.5rem; margin-bottom: var(--e2); }
+
+/* Relacionados */
+.relacionados { margin-top: var(--seccion); padding-top: var(--e4); border-top: 1px solid var(--tinta); }
+.relacionados h2 { margin-bottom: var(--e3); }
+.relacionados-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e4) var(--e2); }
+
+/* Computadora: imagen 5 columnas fija, texto 7 columnas */
+@media (min-width: 900px) {
+  .detalle { padding-top: var(--e4); }
+  .detalle-cuerpo { grid-template-columns: 5fr 7fr; gap: 72px; margin-top: var(--e4); align-items: start; }
+  .detalle-imagen { order: 1; position: sticky; top: 140px; }
+  .detalle-info { order: 2; }
+  .relacionados-lista { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--e3); }
+}
