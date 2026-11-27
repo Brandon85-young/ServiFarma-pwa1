@@ -1,84 +1,105 @@
 import { useState } from 'react';
-import { CATEGORIAS, PRODUCTOS } from '../data/productos.js';
 import TarjetaProducto from '../components/TarjetaProducto.jsx';
- 
-// ===== PANTALLA DE CATÁLOGO =====
-export default function Catalogo({ busqueda, verProducto }) {
-  const [seleccionadas, setSeleccionadas] = useState([]);
+import '../styles/catalogo.css';
+
+// ===== PANTALLA DE CATÁLOGO - Brandon =====
+export default function Catalogo({
+  productos,
+  categorias,
+  busqueda,
+  setBusqueda,
+  categoria,
+  setCategoria,
+  verProducto,
+}) {
   const [orden, setOrden] = useState('nombre');
-  const [filtroAbierto, setFiltroAbierto] = useState(false);
- 
-  // Marca o desmarca una categoría del filtro
-  function cambiarCategoria(cat) {
-    if (seleccionadas.includes(cat)) {
-      setSeleccionadas(seleccionadas.filter((c) => c !== cat));
-    } else {
-      setSeleccionadas([...seleccionadas, cat]);
-    }
-  }
- 
-  // 1) Filtra por búsqueda y por categoría
-  let lista = PRODUCTOS.filter((p) =>
-    p.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  // En celular empieza en lista; en computadora, en cuadrícula
+  const [forma, setForma] = useState(() =>
+    window.innerWidth < 600 ? 'renglon' : 'tarjeta'
   );
-  if (seleccionadas.length > 0) {
-    lista = lista.filter((p) => seleccionadas.includes(p.categoria));
+
+  // 1) Filtra por categoría y por búsqueda
+  let lista = productos;
+  if (categoria !== 'Todas') lista = lista.filter((p) => p.categoria === categoria);
+  if (busqueda) {
+    lista = lista.filter((p) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
   }
- 
+
   // 2) Ordena
   lista = [...lista].sort((a, b) => {
     if (orden === 'menor') return a.precio - b.precio;
     if (orden === 'mayor') return b.precio - a.precio;
     return a.nombre.localeCompare(b.nombre);
   });
- 
+
+  const opciones = ['Todas', ...categorias];
+  const contar = (cat) =>
+    cat === 'Todas' ? productos.length : productos.filter((p) => p.categoria === cat).length;
+
   return (
-    <section className="catalogo">
-      {/* ===== FILTRO (barra lateral) ===== */}
-      <aside className={filtroAbierto ? 'filtro abierto' : 'filtro'}>
-        <h3>Filtro</h3>
-        {CATEGORIAS.map((cat) => (
-          <label key={cat} className="opcion">
-            <input
-              type="checkbox"
-              checked={seleccionadas.includes(cat)}
-              onChange={() => cambiarCategoria(cat)}
-            />
-            {cat}
-          </label>
-        ))}
-        {seleccionadas.length > 0 && (
-          <button className="btn-limpiar" onClick={() => setSeleccionadas([])}>
-            Quitar filtros
+    <section className="contenedor catalogo">
+      {/* ===== CATEGORÍAS: lista lateral en computadora, fila deslizable en celular ===== */}
+      <nav className="cat-lista" aria-label="Categorías">
+        <p className="kicker cat-titulo">Categorías</p>
+        {opciones.map((cat) => (
+          <button
+            key={cat}
+            className={categoria === cat ? 'activa' : ''}
+            onClick={() => setCategoria(cat)}
+          >
+            <span>{cat === 'Todas' ? 'Todos' : cat}</span>
+            <span className="dato cat-num">{contar(cat)}</span>
           </button>
-        )}
-      </aside>
- 
-      <div className="catalogo-contenido">
-        <div className="catalogo-encabezado">
-          <h2>Catálogo</h2>
-          <div className="controles">
-            <button className="btn-filtro" onClick={() => setFiltroAbierto(!filtroAbierto)}>
-              Filtro
-            </button>
-            <select value={orden} onChange={(e) => setOrden(e.target.value)}>
-              <option value="nombre">Ordenar: A - Z</option>
+        ))}
+      </nav>
+
+      <div className="cat-contenido">
+        <header className="cat-cabeza">
+          <div>
+            <p className="kicker">Catálogo</p>
+            <h1>{categoria === 'Todas' ? 'Todos los productos' : categoria}</h1>
+          </div>
+
+          <div className="cat-controles">
+            <select className="campo" value={orden} onChange={(e) => setOrden(e.target.value)} aria-label="Ordenar">
+              <option value="nombre">A – Z</option>
               <option value="menor">Precio: menor a mayor</option>
               <option value="mayor">Precio: mayor a menor</option>
             </select>
+            <div className="cat-forma" role="group" aria-label="Forma de ver">
+              <button className={forma === 'tarjeta' ? 'activa' : ''} onClick={() => setForma('tarjeta')}>
+                Cuadrícula
+              </button>
+              <button className={forma === 'renglon' ? 'activa' : ''} onClick={() => setForma('renglon')}>
+                Lista
+              </button>
+            </div>
           </div>
-        </div>
- 
-        {busqueda && <p className="nota">Resultados para: "{busqueda}"</p>}
- 
-        <div className="tarjetas">
-          {lista.map((p) => (
-            <TarjetaProducto key={p.id} producto={p} verProducto={verProducto} />
-          ))}
-        </div>
- 
-        {lista.length === 0 && (
-          <p className="vacio">No se encontró ningún producto.</p>
+        </header>
+
+        <p className="cat-resumen texto-suave">
+          <span className="dato">{lista.length}</span> {lista.length === 1 ? 'producto' : 'productos'}
+          {busqueda && (
+            <>
+              {' '}para “{busqueda}” ·{' '}
+              <button className="enlace" onClick={() => setBusqueda('')}>Quitar búsqueda</button>
+            </>
+          )}
+        </p>
+
+        {lista.length > 0 ? (
+          <div className={forma === 'tarjeta' ? 'cat-cuadricula' : 'cat-renglones'}>
+            {lista.map((p) => (
+              <TarjetaProducto key={p.id} producto={p} verProducto={verProducto} forma={forma} />
+            ))}
+          </div>
+        ) : (
+          <div className="cat-vacio">
+            <p>No encontramos ese producto.</p>
+            <p className="texto-suave">
+              Puede que sí lo tengamos en tienda: llama al <a className="dato" href="tel:4171665930">417 166 5930</a>.
+            </p>
+          </div>
         )}
       </div>
     </section>

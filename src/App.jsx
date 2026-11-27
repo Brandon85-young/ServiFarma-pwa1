@@ -13,6 +13,7 @@ import {
   cerrarSesion,
 } from './data/basedatos.js';
 
+// ===== APP PRINCIPAL (SPA) - Brandon =====
 // Decide qué pantalla se muestra y escucha la base de datos (Firestore).
 export default function App() {
   const [vista, setVista] = useState('inicio'); // inicio | catalogo | detalle | login | admin
@@ -25,6 +26,8 @@ export default function App() {
   const [cargando, setCargando] = useState(true);
   const [errorDatos, setErrorDatos] = useState('');
 
+  // ===== BASE DE DATOS EN TIEMPO REAL =====
+  // Cada vez que algo cambia en Firestore, la app se actualiza sola.
   useEffect(() => {
     const dejarProductos = escucharProductos(
       (lista) => {

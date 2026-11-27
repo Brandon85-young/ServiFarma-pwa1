@@ -1,4 +1,4 @@
-// ===== PIE DE PÁGINA: CONTÁCTANOS =====
+// ===== PIE DE PÁGINA - Michelle =====
 export default function PiePagina() {
   return (
     <footer className="pie">
