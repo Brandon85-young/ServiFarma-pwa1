@@ -16,6 +16,49 @@ import '../styles/admin.css';
 // ===== PANEL DE ADMINISTRACIÓN - Juan =====
 // CRUD de productos y de categorías (Firestore) + control de caducidades.
 
+const IMAGEN_GENERICA = '/img/productos/generico.svg';
+
+// Reduce la foto a un cuadro de 600 x 600 px con fondo blanco y la convierte
+// en texto (JPG) para guardarla dentro del producto en Firestore.
+// Se hace así porque Firebase Storage ya no está incluido en el plan gratuito.
+function reducirFoto(archivo, lado = 600) {
+  return new Promise((resolve, reject) => {
+    if (!archivo.type.startsWith('image/')) {
+      reject(new Error('Elige un archivo de imagen (JPG, PNG o WEBP).'));
+      return;
+    }
+    const url = URL.createObjectURL(archivo);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = lado;
+      canvas.height = lado;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, lado, lado);
+      // La foto completa cabe en el cuadro, sin recortarse
+      const escala = Math.min(lado / img.width, lado / img.height);
+      const w = img.width * escala;
+      const h = img.height * escala;
+      ctx.drawImage(img, (lado - w) / 2, (lado - h) / 2, w, h);
+      URL.revokeObjectURL(url);
+      // Si queda muy pesada, se baja la calidad (Firestore acepta hasta 1 MB por producto)
+      let calidad = 0.8;
+      let datos = canvas.toDataURL('image/jpeg', calidad);
+      while (datos.length > 300000 && calidad > 0.4) {
+        calidad -= 0.1;
+        datos = canvas.toDataURL('image/jpeg', calidad);
+      }
+      resolve(datos);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('No se pudo leer la imagen. Prueba con otra.'));
+    };
+    img.src = url;
+  });
+}
+
 const VACIO = {
   nombre: '',
   categoria: '',
@@ -28,7 +71,7 @@ const VACIO = {
   descripcion: '',
   modoUso: '',
   precauciones: '',
-  imagen: '/img/productos/generico.svg',
+  imagen: IMAGEN_GENERICA,
 };
 
 export default function Admin({ productos, categorias, usuario }) {
@@ -101,6 +144,7 @@ function Productos({ productos, categorias }) {
   const [error, setError] = useState('');
   const [aviso, setAviso] = useState('');
   const [guardando, setGuardando] = useState(false);
+  const [procesandoFoto, setProcesandoFoto] = useState(false);
 
   function nuevo() {
     setForm({ ...VACIO, categoria: categorias[0] || '' });
@@ -117,6 +161,21 @@ function Productos({ productos, categorias }) {
 
   function cambiar(campo, valor) {
     setForm({ ...form, [campo]: valor });
+  }
+
+  async function elegirFoto(e) {
+    const archivo = e.target.files[0];
+    e.target.value = ''; // permite volver a elegir la misma foto
+    if (!archivo) return;
+    setProcesandoFoto(true);
+    setError('');
+    try {
+      const datos = await reducirFoto(archivo);
+      setForm((f) => ({ ...f, imagen: datos }));
+    } catch (err) {
+      setError(err.message);
+    }
+    setProcesandoFoto(false);
   }
 
   async function guardar(e) {
@@ -209,6 +268,24 @@ function Productos({ productos, categorias }) {
                 Recomendado en inicio
               </label>
             </div>
+            <div className="ancho-2 admin-foto">
+              <span className="admin-foto-titulo">Foto del producto</span>
+              <div className="admin-foto-fila">
+                <img src={form.imagen || IMAGEN_GENERICA} alt="Vista previa de la foto" />
+                <div className="admin-foto-acciones">
+                  <label className="btn btn-linea admin-foto-subir">
+                    {procesandoFoto ? 'Procesando…' : form.imagen && form.imagen !== IMAGEN_GENERICA ? 'Cambiar foto' : 'Subir foto'}
+                    <input type="file" accept="image/*" onChange={elegirFoto} disabled={procesandoFoto} />
+                  </label>
+                  {form.imagen && form.imagen !== IMAGEN_GENERICA && (
+                    <button type="button" className="admin-foto-quitar" onClick={() => cambiar('imagen', IMAGEN_GENERICA)}>
+                      Quitar foto
+                    </button>
+                  )}
+                  <span className="admin-foto-nota">JPG, PNG o WEBP. Se ajusta sola a 600 × 600 px. En celular puedes tomarla con la cámara.</span>
+                </div>
+              </div>
+            </div>
             <label className="ancho-2">Descripción
               <textarea className="campo" rows="2" value={form.descripcion} onChange={(e) => cambiar('descripcion', e.target.value)} />
             </label>
@@ -223,7 +300,7 @@ function Productos({ productos, categorias }) {
           {error && <p className="admin-error" role="alert">{error}</p>}
 
           <div className="admin-botones">
-            <button type="submit" className="btn btn-principal" disabled={guardando}>
+            <button type="submit" className="btn btn-principal" disabled={guardando || procesandoFoto}>
               {guardando ? 'Guardando…' : editandoId ? 'Guardar cambios' : 'Agregar producto'}
             </button>
             <button type="button" className="btn btn-linea" onClick={() => setForm(null)}>Cancelar</button>
@@ -256,8 +333,13 @@ function Productos({ productos, categorias }) {
           {lista.map((p) => (
             <tr key={p.id} className={editandoId === p.id ? 'editando' : ''}>
               <td data-etiqueta="Producto">
-                <strong>{p.nombre}</strong>
-                <span className="texto-suave tabla-sub">{p.presentacion}</span>
+                <span className="tabla-producto">
+                  <img src={p.imagen || IMAGEN_GENERICA} alt="" />
+                  <span>
+                    <strong>{p.nombre}</strong>
+                    <span className="texto-suave tabla-sub">{p.presentacion}</span>
+                  </span>
+                </span>
               </td>
               <td data-etiqueta="Categoría">{p.categoria}</td>
               <td data-etiqueta="Precio" className="num dato">{precio(p.precio)}</td>

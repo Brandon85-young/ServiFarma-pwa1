@@ -1,8 +1,7 @@
 // ===== CONEXIÓN CON FIREBASE - Juan =====
-// 1) Pega aquí la configuración de tu proyecto:
-//    Firebase Console -> ⚙ Configuración del proyecto -> Tus apps -> App web (</>)
-// 2) Esta configuración NO es secreta: se puede subir a GitHub. La seguridad
-//    la dan las REGLAS de Firestore (archivo firestore.rules).
+// Configuración del proyecto ServiFarmaSerVel en Firebase.
+// Esta configuración NO es secreta: se puede subir a GitHub. La seguridad
+// la dan las REGLAS de Firestore (archivo firestore.rules).
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import {
@@ -12,12 +11,12 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'TU_API_KEY',
-  authDomain: 'TU_PROYECTO.firebaseapp.com',
-  projectId: 'TU_PROYECTO',
-  storageBucket: 'TU_PROYECTO.firebasestorage.app',
-  messagingSenderId: 'TU_SENDER_ID',
-  appId: 'TU_APP_ID',
+  apiKey: 'AIzaSyC8veTjnZQ7MFQibnr9ajEdsYuPHseQw5o',
+  authDomain: 'servifarmaservel-8d4e4.firebaseapp.com',
+  projectId: 'servifarmaservel-8d4e4',
+  storageBucket: 'servifarmaservel-8d4e4.firebasestorage.app',
+  messagingSenderId: '438509310675',
+  appId: '1:438509310675:web:2d815ef68256a412ebfa26',
 };
 
 // Mientras no pongan su configuración, la app usa el modo local

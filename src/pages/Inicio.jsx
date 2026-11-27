@@ -12,7 +12,6 @@ const TURNOS = [
 
 const SUGERENCIAS = ['Paracetamol', 'Loratadina', 'Vitamina C'];
 
-// ===== PANTALLA DE INICIO - Brandon =====
 export default function Inicio({ productos, categorias, irA, verProducto, irACategoria, setBusqueda }) {
   const [texto, setTexto] = useState('');
 

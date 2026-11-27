@@ -51,6 +51,19 @@
 
 .admin-filtro { max-width: 320px; margin-bottom: var(--e2); }
 
+/* Foto del producto */
+.admin-foto { display: flex; flex-direction: column; gap: 6px; }
+.admin-foto-titulo { font-size: 0.9rem; font-weight: 700; }
+.admin-foto-fila { display: flex; gap: var(--e2); align-items: center; }
+.admin-foto-fila img { width: 96px; height: 96px; object-fit: cover; background: var(--papel-2); border: 1px solid var(--linea); border-radius: var(--radio); flex-shrink: 0; }
+.admin-foto-acciones { display: flex; flex-wrap: wrap; gap: 8px var(--e2); align-items: center; }
+.admin-foto-subir { position: relative; cursor: pointer; font-weight: 700; }
+.admin-foto-subir input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.admin-foto-subir:focus-within { outline: 2px solid var(--morado); outline-offset: 3px; }
+.admin-foto-quitar { color: var(--rojo); font-size: 0.9rem; }
+.admin-foto-quitar:hover { text-decoration: underline; }
+.admin-foto-nota { flex-basis: 100%; font-size: 0.8rem; font-weight: 400; color: var(--tinta-suave); }
+
 /* Tabla */
 .tabla { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .tabla th {
@@ -71,6 +84,8 @@
 .tabla tbody tr:hover { background: #faf9fb; }
 .tabla tr.editando { background: var(--morado-claro); }
 .tabla-sub { display: block; font-size: 0.82rem; }
+.tabla-producto { display: flex; gap: 12px; align-items: center; }
+.tabla-producto img { width: 40px; height: 40px; object-fit: cover; background: var(--papel-2); border-radius: var(--radio); flex-shrink: 0; }
 .tabla-acciones { display: flex; gap: 14px; justify-content: flex-end; white-space: nowrap; }
 .tabla-acciones button { color: var(--morado); font-size: 0.9rem; }
 .tabla-acciones button:hover { text-decoration: underline; text-underline-offset: 3px; }
